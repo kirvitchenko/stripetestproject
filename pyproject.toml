@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "stripetestproject"
+version = "0.1.0"
+description = ""
+authors = ["kirvitchenko <vitchenkokir@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+psycopg2-binary = "^2.9.11"
+stripe = "^14.0.0"
+pylint = "^4.0.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

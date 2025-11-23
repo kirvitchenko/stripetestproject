@@ -1,0 +1,8 @@
+[build]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "python manage.py migrate && python manage.py createsuperuser --noinput --username kirill --email admin@example.com || true"
+
+[env]
+DEBUG = "True"
