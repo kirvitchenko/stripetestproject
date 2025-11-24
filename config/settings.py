@@ -10,6 +10,11 @@ SECRET_KEY = "django-insecure-wqt3)y6e=uqeuyq4*g$t%4p___qh)0rep)wxj6@6fcavy1j#8o
 DEBUG = True
 ALLOWED_HOSTS = ['*']
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.railway.app',
+    'https://*.up.railway.app',
+]
+
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
