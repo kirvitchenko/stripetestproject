@@ -48,12 +48,28 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default='postgresql://kirill:password@localhost:5432/stripe_test',
-        conn_max_age=600
-    )
-}
+if os.environ.get('PGHOST'):
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": os.getenv("railway"),
+            "USER": os.getenv("postgres"),
+            "PASSWORD": os.getenv("kkNTCcKkEZPwvrbizmPenkcDfJVdqJDe"),
+            "HOST": os.getenv("postgres.railway.internal"),
+            "PORT": os.getenv("PGPORT", "5432"),
+        }
+    }
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": os.getenv("POSTGRES_DB", "stripe_test"),
+            "USER": os.getenv("POSTGRES_USER", "kirill"),
+            "PASSWORD": os.getenv("POSTGRES_PASSWORD", "password"),
+            "HOST": os.getenv("POSTGRES_HOST", "db"),
+            "PORT": os.getenv("POSTGRES_PORT", "5432"),
+        }
+    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
