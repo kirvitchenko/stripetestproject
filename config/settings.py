@@ -47,7 +47,14 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "config.wsgi.application"
+print("=== DATABASE CONFIG ===")
+print("PGHOST:", os.getenv("PGHOST"))
+print("POSTGRES_HOST:", os.getenv("POSTGRES_HOST"))
 
+if os.environ.get('PGHOST'):
+    print("✅ Using Railway DB")
+else:
+    print("✅ Using Local DB")
 if os.environ.get('PGHOST'):
     DATABASES = {
         "default": {
@@ -66,7 +73,7 @@ else:
             "NAME": os.getenv("POSTGRES_DB", "stripe_test"),
             "USER": os.getenv("POSTGRES_USER", "kirill"),
             "PASSWORD": os.getenv("POSTGRES_PASSWORD", "password"),
-            "HOST": os.getenv("POSTGRES_HOST", "db"),
+            "HOST": os.getenv("POSTGRES_HOST", "localhost"),
             "PORT": os.getenv("POSTGRES_PORT", "5432"),
         }
     }
