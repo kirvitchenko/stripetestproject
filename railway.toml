@@ -1,8 +1,0 @@
-[build]
-builder = "nixpacks"
-
-[deploy]
-startCommand = "echo '1. Starting...' && python -c 'print(\"2. Python works\")' && python manage.py migrate && echo '3. Migrations done' && python -c 'import django; print(\"4. Django imports\")' && python manage.py runserver 0.0.0.0:8000 || echo '5. SERVER FAILED'"
-
-[env]
-DEBUG = "True"
