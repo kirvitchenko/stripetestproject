@@ -1,4 +1,6 @@
 import stripe
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework.generics import get_object_or_404
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
@@ -10,7 +12,7 @@ from stripe_api.utils.stripe_session import create_stripe_session
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
-
+@method_decorator(csrf_exempt, name='dispatch')
 class ItemDetailView(APIView):
     """Представление одного предмета"""
     renderer_classes = [TemplateHTMLRenderer]
@@ -22,7 +24,7 @@ class ItemDetailView(APIView):
             {"item": item, "STRIPE_PUBLIC_KEY": settings.STRIPE_PUBLIC_KEY},
         )
 
-
+@method_decorator(csrf_exempt, name='dispatch')
 class OrderDetailView(APIView):
     """Представление заказа предметов"""
     renderer_classes = [TemplateHTMLRenderer]
@@ -34,7 +36,7 @@ class OrderDetailView(APIView):
             {"order": order, "STRIPE_PUBLIC_KEY": settings.STRIPE_PUBLIC_KEY}
         )
 
-
+@method_decorator(csrf_exempt, name='dispatch')
 class SingleCheckoutSession(APIView):
     """Если предмет один, под капотом делаем для него заказ и перенаправляем на форму Stripe"""
     def get(self, request, pk):
@@ -46,7 +48,7 @@ class SingleCheckoutSession(APIView):
         session = create_stripe_session(order)
         return Response({"id": session.id})
 
-
+@method_decorator(csrf_exempt, name='dispatch')
 class OrderCheckoutSession(APIView):
     """Перенаправляем на форму заказа"""
 
