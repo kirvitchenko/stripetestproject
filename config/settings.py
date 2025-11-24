@@ -48,24 +48,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-if os.environ.get('DATABASE_URL'):
-    DATABASES = {
-        'default': dj_database_url.config(
-            conn_max_age=600,
-            conn_health_checks=True,
-        )
-    }
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": os.getenv("POSTGRES_DB", "stripe_test"),
-            "USER": os.getenv("POSTGRES_USER", "kirill"),
-            "PASSWORD": os.getenv("POSTGRES_PASSWORD", "password"),
-            "HOST": os.getenv("POSTGRES_HOST", "db"),
-            "PORT": os.getenv("POSTGRES_PORT", "5432"),
-        }
-    }
+DATABASES = {
+    'default': dj_database_url.config(
+        default='postgresql://kirill:password@localhost:5432/stripe_test',
+        conn_max_age=600
+    )
+}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
