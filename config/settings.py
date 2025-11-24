@@ -23,7 +23,7 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
+    # "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
@@ -47,14 +47,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "config.wsgi.application"
-print("=== DATABASE CONFIG ===")
-print("PGHOST:", os.getenv("PGHOST"))
-print("POSTGRES_HOST:", os.getenv("POSTGRES_HOST"))
 
-if os.environ.get('PGHOST'):
-    print("✅ Using Railway DB")
-else:
-    print("✅ Using Local DB")
 if os.environ.get('PGHOST'):
     DATABASES = {
         "default": {
